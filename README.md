@@ -20,7 +20,14 @@ storage is further restricted to a single window or tab.
 
 ## Usage
 
-In your event handler (typically `handlers.cljs` or `events.cljs`), add this package to your `ns`.
+Include this in your `project.clj`:
+
+[![Clojars Project](https://img.shields.io/clojars/v/com.degel/re-frame-storage-fx.svg)](https://clojars.org/com.degel/re-frame-storage-fx)
+
+
+
+In your event handler file (typically `handlers.cljs` or `events.cljs`), add this
+package to your `ns`.
 
 ```clj
 (ns ...
@@ -32,21 +39,116 @@ In your event handler (typically `handlers.cljs` or `events.cljs`), add this pac
 
 Then write event handlers that use these effects and coeffects:
 
-TBD...
+### Coeffects
 
 Coeffects:
 
-- `:storage/empty?`
-- `:storage/get`
-- `:storage/all`
-- `:storage/keys`
-- `:storage/vals`
-- `:storage/count`
+#### `:storage/get`
 
-Effects:
+Get one or more items, by key, from local or session storage.
 
-- `:storage/set`
-- `:storage/remove`
+Note that the underlying API is a map of strings to strings, with no understanding of
+keywords or other Clojure types. This library does minimal type coercions of keys or
+values: just passing them through `str`. Effectively, this supports keyword keys by
+converting them to similar-looking strings: `:my-key` ==> `":my-key"`.
+
+Get item from local storage:
+
+```clj
+(re-frame/reg-event-fx
+ :my-handler-get-from-local
+ [(re-frame/inject-cofx :storage/get {:name :my-key})]
+ (fn [{db :db my-key :storage/get}]
+    ...))
+```
+
+Get item from session storage:
+
+```clj
+(re-frame/reg-event-fx
+ :my-handler-get-from-session
+ [(re-frame/inject-cofx :storage/get {:session? true :name :my-key})]
+ (fn [{db :db my-key :storage/get}]
+    ...))
+```
+
+Get multiple stored items:
+
+```clj
+(re-frame/reg-event-fx
+ :my-handler-get-multiple
+ [(re-frame/inject-cofx :storage/get {:names [:key1 :key2]})]
+ (fn [{db :db {:keys [key1 key2]} :storage/get}]
+    ...))
+```
+
+
+#### `:storage/all`
+
+Return map of all keys and values in the local or session store.
+
+TBD - Needs examples
+
+#### `:storage/count`
+
+Return count of all keys and values in the local or session store.
+
+TBD - Needs examples
+
+
+#### `:storage/empty?`
+
+Return true if count is zero.
+
+TBD - Needs examples
+
+#### `:storage/keys`
+
+Return sequence of all keys in local or session store.
+
+TBD - Needs examples
+
+#### `:storage/vals`
+
+Return sequence of all values in local or session store.
+
+TBD - Needs examples
+
+
+### Effects
+
+#### `:storage/set`
+
+Add one or more items to local or session storage
+
+```clj
+(re-frame/reg-event-fx
+ :my-handler
+ (fn [{db :db} _]
+   {:storage/set {:session? false
+                  :name :my-key :value "Schlage"}}))
+
+(re-frame/reg-event-fx
+ :my-handler
+ (fn [{db :db} _]
+   {:storage/set {:session? true
+                  :name :toiletry :value "toothpaste"}}))
+
+(re-frame/reg-event-fx
+ :my-handler
+ (fn [{db :db} _]
+   {:storage/set {:session? false
+                  :pairs [{:name :key1 :value 42}
+                          {:name :key2 :value 17}]}}))
+```
+
+#### `:storage/remove`
+
+Remove one or more items from local or session storage
+
+TBD - Needs examples
+
+
 
 # Canned instructions
 
