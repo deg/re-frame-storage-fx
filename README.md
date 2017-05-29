@@ -1,10 +1,57 @@
-# re-frame-storage-fx
+# Web Storage effects handler for re-frame
 
-FIXME: Write a one-line description of your library/project.
+This is a
+re-frame
+["Effects Handler"](https://github.com/Day8/re-frame/wiki/Effectful-Event-Handlers)
+for [Web Storage](https://en.wikipedia.org/wiki/Web_storage). It is very much inspired
+by <https://github.com/SMX-LTD/re-frame-cookie-fx>, to which I owe a debt of gratitude.
 
 ## Overview
 
-FIXME: Write a paragraph about the library/project and highlight its goals.
+The Web Storage API, originally part of HTML5, is a mechanism to store state in the
+client. It is somewhat similar to cookies, but without any automated mechanisim to send
+the state to a server.
+
+Web Storage is a simple mapping of string keys to string values. Actually, it is two
+such mappings: "local" and "session".
+
+Local storage is per origin (protocol, hostname, and port) and persistent, while Session
+storage is further restricted to a single window or tab.
+
+## Usage
+
+In your event handler (typically `handlers.cljs` or `events.cljs`), add this package to your `ns`.
+
+```clj
+(ns ...
+  (:require
+    ...
+    [com.degel.re-frame-storage-fx]
+    ...))
+```
+
+Then write event handlers that use these effects and coeffects:
+
+TBD...
+
+Coeffects:
+
+- `:storage/empty?`
+- `:storage/get`
+- `:storage/all`
+- `:storage/keys`
+- `:storage/vals`
+- `:storage/count`
+
+Effects:
+
+- `:storage/set`
+- `:storage/remove`
+
+# Canned instructions
+
+The rest of this Readme is the original boilerplate from the Mies template. It should
+all be correct, but is relevant only for maintainers of this library, not users.
 
 ## Setup
 
@@ -51,6 +98,6 @@ Build a single release artifact with the following script and then open `index_r
 
 ## License
 
-Copyright © 2016 FIXME
+Copyright © 2017 David Goldfarb
 
 Distributed under the Eclipse Public License either version 1.0 or (at your option) any later version.
