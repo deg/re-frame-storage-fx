@@ -1,4 +1,4 @@
-(defproject com.degel/re-frame-storage-fx "0.1.0-SNAPSHOT"
+(defproject com.degel/re-frame-storage-fx "0.1.0"
   :description "A re-frame effects handler to manage web storage"
   :url "https://github.com/deg/re-frame-storage-fx"
   :dependencies [[org.clojure/clojure "1.8.0"]
