@@ -2,15 +2,15 @@
 
 This is a
 re-frame
-["Effects Handler"](https://github.com/Day8/re-frame/wiki/Effectful-Event-Handlers)
+[Effects Handler](https://github.com/Day8/re-frame/wiki/Effectful-Event-Handlers)
 for [Web Storage](https://en.wikipedia.org/wiki/Web_storage). It is very much inspired
 by <https://github.com/SMX-LTD/re-frame-cookie-fx>, to which I owe a debt of gratitude.
 
 ## Overview
 
 The Web Storage API, originally part of HTML5, is a mechanism to store state in the
-client. It is somewhat similar to cookies, but without any automated mechanisim to send
-the state to a server.
+client. It is similar to cookies, but without any automated mechanisim to send the state
+to a server.
 
 Web Storage is a simple mapping of string keys to string values. Actually, it is two
 such mappings: "local" and "session".
@@ -33,7 +33,7 @@ package to your `ns`.
 (ns ...
   (:require
     ...
-    [com.degel.re-frame-storage-fx]
+    [com.degel.re-frame.storage]
     ...))
 ```
 
